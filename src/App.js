@@ -1,36 +1,20 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import './App.css';
-import { useAnimationEvents } from './hooks/useAnimationEvent';
-function App() {
-  const [data, setDate] = useState([1, 2, 3]);
-  const [releasedBall, setReleasedBall] = useState(0);
-  const ballRefs = useRef([]);
-  useAnimationEvents(ballRefs.current, 'animationend', () => {
-    ballRefs.current = [1];
-    setReleasedBall(0);
-    setDate([parseInt(Math.random() * 100), parseInt(Math.random() * 100)]);
-  });
-  useEffect(() => {
-    console.log(ballRefs.current, 'ballRef');
-  }, [ballRefs]);
-  const renderBall = useMemo(() => {
-    return (
-      <div>
-        {data.map((item) => (
-          <div
-            ref={(r) => ballRefs.current.push(r)}
-            onClick={(e) => {
-              setReleasedBall(item);
-            }}
-            className={`ball ${releasedBall === item ? 'flip' : ''}`}
-          >
-            第{item}球
-          </div>
-        ))}
-      </div>
+import { Children, memo } from 'react';
+import A from './components/A';
+import B from './components/B';
+import C from './components/C';
+import StoreByImmer from './components/storeByImmer';
+import { checkPhone } from './utils.js';
+console.log(checkPhone(12345678910), 'checkPhone');
+const App = () => {
+  const Components = [A, B, C].reduce((Pre, Next) => {
+    console.log(Pre, Next);
+    return ({ children }) => (
+      <Pre>
+        <Next>{children}</Next>
+      </Pre>
     );
-  }, [data, releasedBall]);
-  return <div className="App">{renderBall}</div>;
-}
+  });
+  return <Components>1212</Components>;
+};
 
-export default App;
+export default memo(App);

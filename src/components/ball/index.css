@@ -1,0 +1,55 @@
+.ball-wrap {
+  width: 400px;
+  height: 400px;
+  background: rgb(174, 105, 8);
+  margin-top: 30px;
+  display: grid;
+  place-content: center;
+  gap: 20px;
+  grid-template-columns: repeat(3, 100px);
+}
+
+.ball-shaking {
+  animation: shaking 2s infinite;
+}
+
+@keyframes shaking {
+  0% {
+    transform: translateY(0);
+  }
+
+  60% {
+    transform: translateY(20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.flip {
+  animation: collectBallFrames 3s;
+}
+
+.ball {
+  width: 100px;
+  height: 100px;
+  color: #fff;
+  text-align: center;
+  line-height: 100px;
+  border-radius: 100%;
+  opacity: .1;
+  background-color: rgba(42, 33, 33);
+}
+
+@keyframes collectBallFrames {
+  0% {
+    transform: translate(0px, 0px);
+    opacity: .3;
+  }
+
+  100% {
+    transform: translate(200px, 200px);
+    opacity: 0;
+  }
+}
