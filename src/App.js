@@ -14,6 +14,7 @@ const App = () => {
       </Pre>
     );
   });
+  // TODO 使用Provider 传递全局信息 user config;
   return <Components>1212</Components>;
 };
 
